@@ -5,7 +5,7 @@ Authors: Kunhao Zheng, Stanislas Polu, David Renshaw, OpenAI GPT-f
 
 ! This file was ported from Lean 3 source module valid and edited by Kaiyu Yang.
 -/
-import MiniF2F.Minif2fImport
+import Mathlib
 
 
 open BigOperators Real Nat Topology
@@ -185,7 +185,7 @@ theorem mathd_algebra_73 (p q r x : ℂ) (h₀ : (x - p) * (x - q) = (r - p) * (
 
 theorem mathd_numbertheory_109 (v : ℕ → ℕ) (h₀ : ∀ n, v n = 2 * n - 1) :
   (∑ k ∈ Finset.Icc 1 100, v k) % 7 = 4 := by
-  simp_all only [ge_iff_le, gt_iff_lt, lt_one_iff]
+  simp_all only
   apply Eq.refl
 
 theorem algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3 (x y z : ℤ)
@@ -216,7 +216,7 @@ theorem algebra_amgm_prod1toneq1_sum1tongeqn (a : ℕ → NNReal) (n : ℕ)
   sorry
 
 theorem mathd_algebra_101 (x : ℝ) (h₀ : x ^ 2 - 5 * x - 4 ≤ 10) : x ≥ -2 ∧ x ≤ 7 := by
-  simp_all only [rpow_two, tsub_le_iff_right, ge_iff_le]
+  simp_all only [tsub_le_iff_right, ge_iff_le]
   apply And.intro
   · nlinarith
   · nlinarith
@@ -302,7 +302,7 @@ theorem amc12a_2008_p2 (x : ℝ) (h₀ : x * (1 / 2 + 2 / 3) = 1) : x = 6 / 7 :=
 
 theorem mathd_algebra_35 (p q : ℝ → ℝ) (h₀ : ∀ x, p x = 2 - x ^ 2)
     (h₁ : ∀ x : ℝ, x ≠ 0 → q x = 6 / x) : p (q 2) = -7 := by
-  simp_all only [rpow_two, ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, div_pow]
+  simp_all only [ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, div_pow]
   norm_num
 
 theorem algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x :
@@ -318,12 +318,12 @@ theorem mathd_numbertheory_35 (S : Finset ℕ) (h₀ : ∀ n : ℕ, n ∈ S ↔ 
   sorry
 
 theorem amc12a_2021_p7 (x y : ℝ) : 1 ≤ (x * y - 1) ^ 2 + (x + y) ^ 2 := by
-  simp only [sub_eq_add_neg, add_right_comm]
+  simp only [sub_eq_add_neg]
   ring_nf
   nlinarith
 
 theorem mathd_algebra_327 (a : ℝ) (h₀ : 1 / 5 * abs (9 + 2 * a) < 1) : -7 < a ∧ a < -2 := by
-  have h₁ := (mul_lt_mul_left (show 0 < (5 : ℝ) by linarith)).mpr h₀
+  have h₁ := (mul_lt_mul_iff_right₀ (show 0 < (5 : ℝ) by linarith)).mpr h₀
   have h₂ : abs (9 + 2 * a) < 5 := by linarith
   have h₃ := abs_lt.mp h₂
   cases' h₃ with h₃ h₄
@@ -480,7 +480,7 @@ theorem mathd_numbertheory_43 : IsGreatest { n : ℕ | 15 ^ n ∣ 942! } 233 := 
 
 theorem mathd_algebra_214 (a : ℝ) (f : ℝ → ℝ) (h₀ : ∀ x, f x = a * (x - 2) ^ 2 + 3) (h₁ : f 4 = 4) :
   f 6 = 7 := by
-  simp_all only [rpow_two]
+  simp_all only
   linarith
 
 theorem mathd_algebra_96 (x y z a : ℝ) (h₀ : 0 < x ∧ 0 < y ∧ 0 < z)
@@ -500,7 +500,7 @@ theorem amc12_2001_p2 (a b n : ℕ) (h₀ : 1 ≤ a ∧ a ≤ 9) (h₁ : 0 ≤ b
   cases' h₄ with h₅ h₆
   linarith
   exfalso
-  simp_all [le_refl]
+  simp_all
 
 theorem mathd_algebra_185 (s : Finset ℤ) (f : ℤ → ℤ) (h₀ : ∀ x, f x = abs (x + 4))
   (h₁ : ∀ x, x ∈ s ↔ f x < 9) : s.card = 17 := by
@@ -586,9 +586,7 @@ theorem mathd_numbertheory_136 (n : ℕ) (h₀ : 123 * n + 17 = 39500) : n = 321
 
 theorem amc12_2000_p11 (a b : ℝ) (h₀ : a ≠ 0 ∧ b ≠ 0) (h₁ : a * b = a - b) :
     a / b + b / a - a * b = 2 := by
-  field_simp [h₀.1, h₀.2]
-  simp only [h₁, mul_comm, mul_sub]
-  ring
+  grind
 
 theorem amc12b_2003_p9 (a b : ℝ) (f : ℝ → ℝ) (h₀ : ∀ x, f x = a * x + b) (h₁ : f 6 - f 2 = 12) :
     f 12 - f 2 = 30 := by
@@ -597,7 +595,7 @@ theorem amc12b_2003_p9 (a b : ℝ) (f : ℝ → ℝ) (h₀ : ∀ x, f x = a * x 
 
 theorem algebra_2complexrootspoly_xsqp49eqxp7itxpn7i (x : ℂ) :
     x ^ 2 + 49 = (x + 7 * Complex.I) * (x + -7 * Complex.I) := by
-  simp_all only [Complex.cpow_two, neg_mul]
+  simp_all only [neg_mul]
   ring_nf
   simp_all only [Complex.I_sq, neg_mul, one_mul, sub_neg_eq_add]
   ring
@@ -613,7 +611,7 @@ theorem mathd_algebra_149 (f : ℝ → ℝ) (h₀ : ∀ x < -5, f x = x ^ 2 + 5)
 
 theorem mathd_algebra_132 (x : ℝ) (f g : ℝ → ℝ) (h₀ : ∀ x, f x = x + 2) (h₁ : ∀ x, g x = x ^ 2)
   (h₂ : f (g x) = g (f x)) : x = -1 / 2 := by
-  simp_all only [rpow_two]
+  simp_all only
   linarith
 
 theorem mathd_numbertheory_37 : Nat.lcm 9999 100001 = 90900909 := by
@@ -765,7 +763,6 @@ theorem mathd_algebra_11 (a b : ℝ) (h₀ : a ≠ b) (h₁ : a ≠ 2 * b)
 
 theorem amc12a_2003_p1 (u v : ℕ → ℕ) (h₀ : ∀ n, u n = 2 * n + 2) (h₁ : ∀ n, v n = 2 * n + 1) :
     ((∑ k ∈ Finset.range 2003, u k) - ∑ k ∈ Finset.range 2003, v k) = 2003 := by
-  simp_all only [ge_iff_le]
   sorry
 
 theorem numbertheory_aneqprodakp4_anmsqrtanp1eq2 (a : ℕ → ℝ) (h₀ : a 0 = 1)
@@ -819,7 +816,7 @@ theorem mathd_algebra_509 :
 
 theorem mathd_algebra_159 (b : ℝ) (f : ℝ → ℝ)
   (h₀ : ∀ x, f x = 3 * x ^ 4 - 7 * x ^ 3 + 2 * x ^ 2 - b * x + 1) (h₁ : f 1 = 1) : b = -2 := by
-  simp_all only [rpow_two, one_rpow, mul_one, one_pow, add_left_eq_self]
+  simp_all only [mul_one, one_pow]
   linarith
 
 theorem aime_1997_p11 (x : ℝ)
@@ -909,7 +906,7 @@ theorem imo_1966_p4 (n : ℕ) (x : ℝ) (h₀ : ∀ k : ℕ, 0 < k → ∀ m : �
 
 theorem mathd_algebra_67 (f g : ℝ → ℝ) (h₀ : ∀ x, f x = 5 * x + 3) (h₁ : ∀ x, g x = x ^ 2 - 2) :
     g (f (-1)) = 2 := by
-  simp_all only [rpow_two, mul_neg, mul_one]
+  simp_all only [mul_neg, mul_one]
   norm_num
 
 theorem mathd_numbertheory_326 (n : ℤ) (h₀ : (n - 1) * n * (n + 1) = 720 ) : n + 1 = 10 := by
@@ -1061,9 +1058,7 @@ theorem mathd_numbertheory_629 : IsLeast { t : ℕ | 0 < t ∧ Nat.lcm 12 t ^ 3 
 
 theorem amc12a_2017_p2 (x y : ℝ) (h₀ : x ≠ 0) (h₁ : y ≠ 0) (h₂ : x + y = 4 * (x * y)) :
   1 / x + 1 / y = 4 := by
-  simp_all only [ne_eq, one_div]
-  field_simp
-  rwa [add_comm]
+  grind
 
 theorem algebra_amgm_sumasqdivbsqgeqsumbdiva (a b c : ℝ) (h₀ : 0 < a ∧ 0 < b ∧ 0 < c) :
   a ^ 2 / b ^ 2 + b ^ 2 / c ^ 2 + c ^ 2 / a ^ 2 ≥ b / a + c / b + a / c := by
